@@ -1,11 +1,13 @@
 import TodoCard from '@/components/Cards/TodoCard';
 import PageLayout from '@/components/Layouts/MainLayout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Alert, Dimensions, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IStackScreen } from '../Navigations/Stack/AllScreen';
+
 
 type propsType = NativeStackScreenProps<IStackScreen, "Home">
 
@@ -172,9 +174,18 @@ const Home = (props: propsType) => {
     const [todos, setTodos] = React.useState<ITodoItem[]>([]);
     const [selectedIds, setSelectedIds] = useState<number[]>([])
 
-    useEffect(() => {
-        getTodoData()
-    }, []) // only run at first time
+    // useEffect(() => {
+    //     getTodoData()
+    //     console.log("Running")
+    // }, []) // only run at first time
+
+    useFocusEffect(
+        useCallback(()=>{
+            getTodoData()
+            console.log("Running") 
+
+        },[])
+    )
 
     const getTodoData = async () => {
         console.log("runnning")

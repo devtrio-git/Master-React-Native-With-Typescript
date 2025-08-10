@@ -16,7 +16,6 @@ type Iprop = PropsWithChildren<{
 
 
 const TodoCard = ({ item, selectedIds, handleSelect }: Iprop) => {
-    console.log(selectedIds)
     const renderIcon = (key: string): React.ReactElement => {
         switch (key) {
             case "notes":
